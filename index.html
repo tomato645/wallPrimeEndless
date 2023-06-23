@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/button.css">
+    <link rel="stylesheet" href="./styles/css.css">
+    <title>wallPrime</title>
+</head>
+
+<style>
+    html{
+        touch-action: manipulation;
+    }
+    body {
+        background-color: black;
+        color: blue;
+    }
+    #wall{
+        font-size: 150px;
+        margin-top: 50px;
+        margin-left: 20vw;
+        margin-bottom: 20px;
+    }
+    #delete{
+        margin-left: 300px;
+        width: 130px;
+        height: 80px;
+    }
+    #go{
+        margin-left: 300px;
+        width: 130px;
+        height: 160px;
+    }
+    #primesQueue{
+        font-size: 40px;
+        padding: auto;
+    }
+</style>
+
+<body>
+    <h1>hello prime number</h1>
+
+    <h1 id="wall">0</h1>
+
+    <h2 id="primesQueue">0</h2>
+    
+    <div class='primeBtn'></div>
+    <button id="delete">x</button>
+    <button id="go" onclick="go()">GO!</button>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+{
+    "name": "32r23r23r23rq2r3r",
+    "short_name": "ts",
+    "description": "testttttttttttttttt",
+    "icons": [
+      {
+        "src": "./img/192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ],
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#FFFFFF",
+    "theme_color": "#FFFFFF"
+  }
+  
