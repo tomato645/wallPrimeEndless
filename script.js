@@ -1,4 +1,4 @@
-let primes = [2, 3, 5, 7, 9, 11, 13];
+let primes = [2, 3, 5, 7, 9, 11, 13, 17, 19, 23];
 
 async function makePrime(times) {
     let compositeNum = 1;
@@ -37,7 +37,7 @@ function storePrime(prime) {
     document.querySelector("#primesQueue").innerHTML = primesQueue;
 }
 
-WAITTIME = 600;
+WAITTIME = 300;
 COUNTER = 0;
 
 async function go() {
@@ -53,7 +53,7 @@ async function go() {
         console.log("認められる演算かどうか判定します");
         let isInt = Number.isInteger(divisionResult);
         console.log(`整数: ${isInt}`);
-        
+
         if (isInt) {
             console.warn("割った！")
             wallNum = divisionResult;
@@ -66,14 +66,14 @@ async function go() {
             document.querySelector("#wall").style.color = "blue";
             await sleep(WAITTIME / 2);
         }
-        
-        if (wallNum == 1){
+
+        if (wallNum == 1) {
             console.error("Clear!!!");
             COUNTER++
             document.querySelector("#counter").innerHTML = COUNTER;
             makePrime(3);
         }
-        
+
         primesQueue.shift();
         console.log(`現状のキューは${primesQueue}`);
     }
@@ -85,10 +85,12 @@ document.querySelector("#delete").addEventListener("click",
         primesQueue.pop();
         document.querySelector("#primesQueue").innerHTML = primesQueue;
     });
-    
-    window.onload = makePrime(3);
-    
-    // Sleep関数
-    function sleep(ms) {
+
+window.onload = function () {
+    makePrime(3);
+}
+
+// Sleep関数
+function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 };
