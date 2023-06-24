@@ -1,4 +1,4 @@
-let primes = [2, 3, 5, 7, 9, 11, 13, 17, 19, 23];
+let primes = [2, 3, 5, 7, 11, 13, 17, 19, 23];
 
 async function makePrime(times) {
     let compositeNum = 1;
