@@ -1,13 +1,18 @@
 let primes = [2, 3, 5, 7, 9, 11, 13];
 
-function makePrime(times) {
+async function makePrime(times) {
     let compositeNum = 1;
     for (let i = 0; i < times; i++) {
         let randIndex = getRandom(0, primes.length - 1);
         compositeNum *= primes[randIndex];
     }
     console.log(compositeNum);
-    document.querySelector("#wall").innerHTML = compositeNum;
+    let wall = document.querySelector("#wall");
+    wall.innerHTML = compositeNum;
+    for (let i = 50; i <= 150; i += 10) {
+        wall.style.fontSize = `${i}px`;
+        await sleep(10);
+    }
 }
 
 function getRandom(min, max) {
@@ -32,40 +37,47 @@ function storePrime(prime) {
     document.querySelector("#primesQueue").innerHTML = primesQueue;
 }
 
-WAITTIME = 800;
+WAITTIME = 600;
+COUNTER = 0;
 
 async function go() {
-    let wall = document.querySelector("#wall")
+    let goBtn = document.querySelector("#go");
+    goBtn.disabled = true;
+    let wall = document.querySelector("#wall");
     let wallNum = Number(wall.innerHTML);
     let length = primesQueue.length;
-    for (i = 0; i <= length; i++) {
-        let isNan = (wallNum /= primesQueue[i]) !== NaN;
-        let isInt = Number.isInteger(wallNum /= primesQueue[0]);
+    for (i = 0; i < length; i++) {
+        let divisionResult = wallNum / primesQueue[0];
+        console.log(`${wallNum}を${primesQueue[0]}で割ります。`);
+        console.log(`結果は${divisionResult}`);
+        console.log("認められる演算かどうか判定します");
+        let isInt = Number.isInteger(divisionResult);
+        console.log(`整数: ${isInt}`);
         
-        console.log(primesQueue);
-        console.log(isNan);
-        console.log(`isInt: ${isInt}`);
-        if (wallNum == 1){
-            wallNum = "clear";
-            makePrime(3);
-        }else if (isNan && isInt) {
-            console.log(`${wallNum}/${primesQueue[0]} = ${wallNum /= primesQueue[0]}`)
-            console.log(`${wallNum} を ${primesQueue[0]} で割ります`)
-            wallNum /= primesQueue[0];
-            primesQueue.shift();
-            document.querySelector("#primesQueue").innerHTML = primesQueue;
-            document.querySelector("#wall").innerHTML = wallNum;
+        if (isInt) {
+            console.warn("割った！")
+            wallNum = divisionResult;
+            document.querySelector("#wall").innerHTML = divisionResult;
             await sleep(WAITTIME);
         } else {
-            primesQueue.shift();
-            document.querySelector("#primesQueue").innerHTML = primesQueue;
-            wall.style.color = "red";
+            console.warn("割れなかった。。。")
+            document.querySelector("#wall").style.color = "red";
             await sleep(WAITTIME / 2);
-            wall.style.color = "blue";
+            document.querySelector("#wall").style.color = "blue";
             await sleep(WAITTIME / 2);
         }
+        
+        if (wallNum == 1){
+            console.error("Clear!!!");
+            COUNTER++
+            document.querySelector("#counter").innerHTML = COUNTER;
+            makePrime(3);
+        }
+        
+        primesQueue.shift();
+        console.log(`現状のキューは${primesQueue}`);
     }
-    console.warn(primesQueue)
+    goBtn.disabled = false;
 }
 
 document.querySelector("#delete").addEventListener("click",
@@ -73,10 +85,10 @@ document.querySelector("#delete").addEventListener("click",
         primesQueue.pop();
         document.querySelector("#primesQueue").innerHTML = primesQueue;
     });
-
-window.onload = makePrime(3);
-
-// Sleep関数
-function sleep(ms) {
+    
+    window.onload = makePrime(3);
+    
+    // Sleep関数
+    function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-  };
+};
