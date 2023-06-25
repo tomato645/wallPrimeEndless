@@ -4,7 +4,7 @@
   "description": "testttttttttttttttt",
   "icons": [
     {
-      "src": "./img/192x192.png",
+      "src": "./img/1024x1024.png",
       "sizes": "1024x1024",
       "type": "image/png"
     }
