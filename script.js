@@ -32,8 +32,8 @@ function makeButtons() {
 makeButtons();
 
 let primesQueue = [];
-function storePrime(prime) {
-    primesQueue.push(prime);
+function storePrime(selectedPrime) {
+    primesQueue.push(selectedPrime);
     document.querySelector("#primesQueue").innerHTML = primesQueue;
 }
 
@@ -70,6 +70,7 @@ async function go() {
         if (wallNum == 1) {
             console.error("Clear!!!");
             COUNTER++
+            primesQueue = [];
             document.querySelector("#counter").innerHTML = COUNTER;
             makePrime(3);
         }
